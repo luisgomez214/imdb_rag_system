@@ -3,22 +3,22 @@ On IMDb, there is a section called "Reviews" where members share their ratings a
 
 The LLM used for this system is Groq llama, the language model is not up to date with information from recently released movies. The reason why this model was used is because the goal is to provde users with information that are strictly based on the reviews from the links. Up to date models will already have review and critic information in its training set, making the goal difficult to achieve. 
 
-This system focuses on the 2024 movie 'Wicked' but can easily be used for other movies. Simply switch the links on 'test_scrape_imdb.py'.
+This system focuses on the 2024 movie 'Wicked' but can easily be used for other movies. Simply switch the links on 'scrape_sql.py'.
 
 
 # Setup
 
 First scrape all the links found in the 'External Reviews' (the ones I used are 'https://www.imdb.com/title/tt1262426/externalreviews/?ref_=tt_ov_crv'). I used a software called ParseHub. 
-Once all new links have been retrieved, replace the current links in 'test_scrape_imdb.py' with the new ones. 
+Once all new links have been retrieved, replace the current links in 'scrape_sql.py' with the new ones. 
 
 Then run: 
 ```
-python3 test_scrape_imdb.py 
+python3 scrape_sql.py.py 
 ```
 
 # Database
 
-Once 'test_scrape_imdb.py' has been ran, a SQL database is made. The contents of the database are
+Once 'scrape_sql.py.py' has been ran, a SQL database 'reviews.db' is made. The contents of the database are
 ```
     cursor.execute('''
         CREATE TABLE IF NOT EXISTS reviews (
@@ -78,7 +78,7 @@ According to the review summaries and feedback, critics noted the following issu
 ```
 
 # Evaluate: 
-To evaluate the system, both partial and semantic similarities were used. The threshold for semantic was at least .6 and for partial at least .8. If the predicted matched by either of those thresholds, then it is counted as correct. At times, "vague" or "broad" questions will give different answers than what was expected. For example "What did crtics think of Ariana Grande's performance in the 2024 movie Wicked." Will result in a different answer every time because there are many things critics could talk about regarding her performance.  
+To evaluate the system, both partial and semantic similarities were used. The threshold for semantic was at least .6 and for partial at least .8. If the predicted matched by either of those thresholds, then it is counted as correct. At times, "vague" or "broad" questions will give different answers. For example "What did critics think of Ariana Grande's performance in the 2024 movie Wicked." Will result in a different answer every time because there are many things critics could talk about regarding her performance (could be about her acting or her singing).  
 
 Below is the results: 
 ```
